@@ -1,0 +1,17 @@
+aws ec2 run-instances --image-id ami-081bb417559035fe8 --instance-type t2.micro --count 1 --subnet-id subnet-f676729e --security-group-ids sg-0e09e226f6f5b1c24 --key-name ansiblekey
+
+aws ec2 create-volume --volume-type gp2 --size 10G--availability-zone ap-south-1a
+
+aws ec2 attach-volume --volume-id vol-0e95f89b7cb1d316e --instance-id i-0fdf14a16ee5f8784 --device /dev/sdf
+
+yum install httpd -y
+
+aws s3api create-bucket --bucket mycf123 --region ap-south-1 --create-bucket-configuration LocationConstraint=ap-south-1
+
+aws s3 cp g1.png s3://mycf123
+
+aws cloudfront create-distribution --origin-domain-name cf123.s3.amazonaws.com
+
+systemctl start httpd
+
+systemctl enable httpd
